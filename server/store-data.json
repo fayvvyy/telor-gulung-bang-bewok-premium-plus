@@ -1,0 +1,170 @@
+{
+  "orders": [
+    {
+      "id": 1793338659786,
+      "number": "001",
+      "customer": "Fayd",
+      "phone": "6285797562569",
+      "customerEmail": "fananecron06@gmail.com",
+      "address": "Ambil di lokasi penjualan",
+      "fulfillment": "PICKUP",
+      "paymentMethod": "QRIS",
+      "subtotal": 20000,
+      "shippingFee": 0,
+      "discount": 0,
+      "voucherCode": null,
+      "total": 20000,
+      "status": "COMPLETED",
+      "items": [
+        {
+          "productId": 8,
+          "name": "Paket Hemat A (5 tusuk original)",
+          "quantity": 2
+        }
+      ],
+      "createdAt": "2026-10-30T05:37:39.786Z",
+      "qrCode": "/qris-bang-bewok.png",
+      "expiresAt": 1793338959790,
+      "paymentProof": "/uploads/1793338669294-WhatsApp_Image_2026-09-11_at_14.02.24.jpeg"
+    },
+    {
+      "id": 1793338902083,
+      "number": "002",
+      "customer": "Fayd",
+      "phone": "6285797562569",
+      "customerEmail": "fananecron06@gmail.com",
+      "address": "Ambil di lokasi penjualan",
+      "fulfillment": "PICKUP",
+      "paymentMethod": "QRIS",
+      "subtotal": 48000,
+      "shippingFee": 0,
+      "discount": 0,
+      "voucherCode": null,
+      "total": 48000,
+      "status": "COMPLETED",
+      "items": [
+        {
+          "productId": 2,
+          "name": "Telor Gulung Sosis ayam",
+          "quantity": 24
+        }
+      ],
+      "createdAt": "2026-10-30T05:41:42.083Z",
+      "qrCode": "/qris-bang-bewok.png",
+      "expiresAt": 1793339202118,
+      "paymentProof": "/uploads/1793338909707-Prompt_AI_Copilot.png"
+    },
+    {
+      "id": 1793339356914,
+      "number": "003",
+      "customer": "Fayd",
+      "phone": "6285797562569",
+      "customerEmail": "fananecron06@gmail.com",
+      "address": "Ambil di lokasi penjualan",
+      "fulfillment": "PICKUP",
+      "paymentMethod": "QRIS",
+      "subtotal": 8000,
+      "shippingFee": 0,
+      "discount": 0,
+      "voucherCode": null,
+      "total": 8000,
+      "status": "COMPLETED",
+      "items": [
+        {
+          "productId": 2,
+          "name": "Telor Gulung Sosis ayam",
+          "quantity": 1
+        },
+        {
+          "productId": 4,
+          "name": "Telor Gulung Basreng",
+          "quantity": 3
+        }
+      ],
+      "createdAt": "2026-10-30T05:49:16.915Z",
+      "qrCode": "/qris-bang-bewok.png",
+      "expiresAt": 1793339656935,
+      "paymentProof": "/uploads/1793339364266-Prompt_AI_Copilot.png"
+    },
+    {
+      "id": 1793340203010,
+      "number": "004",
+      "customer": "Fayd",
+      "phone": "6285797562569",
+      "customerEmail": "fananecron06@gmail.com",
+      "address": "Ambil di lokasi penjualan",
+      "fulfillment": "PICKUP",
+      "paymentMethod": "QRIS",
+      "subtotal": 6000,
+      "shippingFee": 0,
+      "discount": 0,
+      "voucherCode": null,
+      "total": 6000,
+      "status": "COMPLETED",
+      "items": [
+        {
+          "productId": 2,
+          "name": "Telor Gulung Sosis ayam",
+          "quantity": 3
+        }
+      ],
+      "createdAt": "2026-10-30T06:03:23.010Z",
+      "qrCode": "/qris-bang-bewok.png",
+      "expiresAt": 1793340503023
+    },
+    {
+      "id": 1793340366695,
+      "number": "005",
+      "customer": "Fayd",
+      "phone": "6285797562569",
+      "customerEmail": "fananecron06@gmail.com",
+      "address": "Ambil di lokasi penjualan",
+      "fulfillment": "PICKUP",
+      "paymentMethod": "QRIS",
+      "subtotal": 12000,
+      "shippingFee": 0,
+      "discount": 0,
+      "voucherCode": null,
+      "total": 12000,
+      "status": "WAITING_CONFIRMATION",
+      "items": [
+        {
+          "productId": 1,
+          "name": "Telor Gulung Sosis sapi",
+          "quantity": 6
+        }
+      ],
+      "createdAt": "2026-10-30T06:06:06.695Z",
+      "qrCode": "/qris-bang-bewok.png",
+      "expiresAt": 1793340666714,
+      "paymentProof": "/uploads/1793340376612-Prompt_AI_Copilot.png"
+    }
+  ],
+  "vouchers": [],
+  "storeOpen": true,
+  "customers": [
+    [
+      "persist-test@example.com",
+      {
+        "id": 1793338602031,
+        "name": "Pembeli Persist",
+        "phone": "628123456789",
+        "email": "persist-test@example.com",
+        "verified": true,
+        "passwordHash": "$2b$12$SeMFfgiPYpZ69JfsmTcWpuVzp0.QFbsRJx0/tIaC/.lud8bRudYh2"
+      }
+    ],
+    [
+      "fananecron06@gmail.com",
+      {
+        "id": 1793338650672,
+        "name": "Fayd",
+        "phone": "6285797562569",
+        "email": "fananecron06@gmail.com",
+        "verified": true,
+        "passwordHash": "$2b$12$F89.cWKLCOUMkxr7zSEFmee.lu4dziQb2LHcxf4NCSdPtcuIQ.UYW",
+        "photoPath": "/uploads/1793341311689-Firefly_Gemini_Flash.png"
+      }
+    ]
+  ]
+}

@@ -1,0 +1,28 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Role { id Int @id @default(autoincrement()); name String @unique; admins Admin[] }
+model Admin { id Int @id @default(autoincrement()); name String; email String @unique; passwordHash String; role Role @relation(fields: [roleId], references: [id]); roleId Int; activityLogs AdminActivityLog[] }
+model Customer { id Int @id @default(autoincrement()); name String; phone String @unique; passwordHash String?; memberships Membership[]; orders Order[]; reviews Review[] }
+model Category { id Int @id @default(autoincrement()); name String @unique; products Product[] }
+model Product { id Int @id @default(autoincrement()); name String; description String?; price Int; stock Int @default(0); active Boolean @default(true); category Category @relation(fields: [categoryId], references: [id]); categoryId Int; variants ProductVariant[]; orderItems OrderItem[]; inventory Inventory? }
+model ProductVariant { id Int @id @default(autoincrement()); name String; priceAdjustment Int @default(0); product Product @relation(fields: [productId], references: [id]); productId Int }
+model Order { id Int @id @default(autoincrement()); number String @unique; customer Customer? @relation(fields: [customerId], references: [id]); customerId Int?; customerName String; phone String; address String; subtotal Int; shippingFee Int @default(0); discount Int @default(0); total Int; status String @default("WAITING_CONFIRMATION"); payment Payment?; items OrderItem[]; createdAt DateTime @default(now()) }
+model OrderItem { id Int @id @default(autoincrement()); order Order @relation(fields: [orderId], references: [id], onDelete: Cascade); orderId Int; product Product @relation(fields: [productId], references: [id]); productId Int; quantity Int; unitPrice Int; subtotal Int }
+model Payment { id Int @id @default(autoincrement()); order Order @relation(fields: [orderId], references: [id]); orderId Int @unique; method String; status String @default("WAITING_PAYMENT"); proofUrl String? }
+model Voucher { id Int @id @default(autoincrement()); code String @unique; name String; type String; value Int; minimumTransaction Int @default(0); maxDiscount Int?; startsAt DateTime; endsAt DateTime; quota Int?; active Boolean @default(true); usages VoucherUsage[] }
+model VoucherUsage { id Int @id @default(autoincrement()); voucher Voucher @relation(fields: [voucherId], references: [id]); voucherId Int; customer Customer?; customerId Int?; usedAt DateTime @default(now()) }
+model Membership { id Int @id @default(autoincrement()); customer Customer @relation(fields: [customerId], references: [id]); customerId Int @unique; level String @default("BRONZE"); points Int @default(0); totalSpent Int @default(0) }
+model Review { id Int @id @default(autoincrement()); customer Customer @relation(fields: [customerId], references: [id]); customerId Int; rating Int; comment String? }
+model Inventory { id Int @id @default(autoincrement()); product Product @relation(fields: [productId], references: [id]); productId Int @unique; minimumStock Int @default(0); movements StockMovement[] }
+model StockMovement { id Int @id @default(autoincrement()); inventory Inventory @relation(fields: [inventoryId], references: [id]); inventoryId Int; type String; quantity Int; note String?; createdAt DateTime @default(now()) }
+model Notification { id Int @id @default(autoincrement()); title String; message String; read Boolean @default(false); createdAt DateTime @default(now()) }
+model StoreSetting { id Int @id @default(autoincrement()); key String @unique; value String }
+model Expense { id Int @id @default(autoincrement()); name String; amount Int; category String; incurredAt DateTime @default(now()) }
+model AdminActivityLog { id Int @id @default(autoincrement()); admin Admin @relation(fields: [adminId], references: [id]); adminId Int; action String; createdAt DateTime @default(now()) }
