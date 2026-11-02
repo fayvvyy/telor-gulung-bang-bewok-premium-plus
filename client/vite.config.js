@@ -1,15 +1,7 @@
-import react from '@vitejs/plugin-react'
-import tailwindcss from '@tailwindcss/vite'
-import { defineConfig } from 'vite'
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
 
 export default defineConfig({
-  plugins: [react(), tailwindcss()],
-  server: {
-    host: '0.0.0.0',
-    proxy: {
-      '/api': 'http://localhost:4000',
-      '/uploads': 'http://localhost:4000',
-      '/socket.io': { target: 'http://localhost:4000', ws: true }
-    }
-  }
-})
+  plugins: [react()],
+  base: "/telor-gulung-bang-bewok-premium-plus/",
+});
