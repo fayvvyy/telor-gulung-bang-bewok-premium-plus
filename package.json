@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "concurrently -n web,api -c yellow,green \"npm run dev --prefix client\" \"npm run dev --prefix server\"",
     "build": "npm run build --prefix client",
-    "start": "npm run start --prefix server"
+    "start": "node server/index.js"
   },
   "keywords": [],
   "author": "",

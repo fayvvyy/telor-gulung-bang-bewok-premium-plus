@@ -29,3 +29,16 @@ Frontend tersedia di `http://localhost:5173`; API di `http://localhost:4000`.
 - PostgreSQL aktif otomatis saat `DATABASE_URL` tersedia. Tanpa database, API tetap berjalan dengan katalog dan pesanan in-memory untuk pengembangan.
 
 QRIS, logo produksi, alamat, dan Cloudinary belum diberikan; gunakan placeholder melalui pengaturan sebelum produksi.
+
+## Publikasi online
+
+Konfigurasi deployment Render tersedia melalui [render.yaml](./render.yaml). Deployment menghasilkan satu alamat publik untuk website, API, login, pesanan, upload QRIS, dan Socket.IO.
+
+1. Pastikan perubahan sudah diunggah ke GitHub.
+2. Masuk ke Render, pilih **New +** lalu **Blueprint**.
+3. Pilih repository GitHub proyek ini dan terapkan `render.yaml`.
+4. Tambahkan `DATABASE_URL` dari Render PostgreSQL atau penyedia PostgreSQL lain agar akun dan pesanan permanen.
+5. Jika memakai SMTP Gmail, tambahkan `GMAIL_APP_EMAIL` dan `GMAIL_APP_PASSWORD`.
+6. Setelah deploy selesai, buka URL yang diberikan Render sebagai alamat publik website.
+
+Tanpa `DATABASE_URL`, aplikasi tetap berjalan dengan penyimpanan fallback lokal, tetapi data dapat hilang saat layanan restart atau deploy ulang.

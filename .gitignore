@@ -7,5 +7,7 @@ node_modules/
 
 dist/
 build/
+server/uploads/
+server/store-data.json
 
 .DS_Store

@@ -21,18 +21,19 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 const app = express()
 const httpServer = createServer(app)
-const io = new Server(httpServer, { cors: { origin: process.env.CLIENT_URL || 'http://localhost:5173', credentials: true } })
+const allowedOrigin = process.env.CLIENT_URL || (process.env.NODE_ENV === 'production' ? true : 'http://localhost:5173')
+const io = new Server(httpServer, { cors: { origin: allowedOrigin, credentials: true } })
 const { Pool } = pg
 const pool = process.env.DATABASE_URL ? new Pool({ connectionString: process.env.DATABASE_URL }) : null
 
 app.use(helmet({ crossOriginResourcePolicy: false }))
-app.use(cors({ origin: process.env.CLIENT_URL || 'http://localhost:5173', credentials: true }))
+app.use(cors({ origin: process.env.NODE_ENV === 'production' && !process.env.CLIENT_URL ? true : (process.env.CLIENT_URL || 'http://localhost:5173'), credentials: true }))
 app.use(express.json({ limit: '1mb' }))
 app.use(cookieParser())
 app.use(morgan('dev'))
 app.use('/api', rateLimit({ windowMs: 60_000, limit: 120, standardHeaders: true }))
 
-const uploadDirectory = path.resolve('uploads')
+const uploadDirectory = process.env.UPLOAD_DIR ? path.resolve(process.env.UPLOAD_DIR) : path.resolve(__dirname, 'uploads')
 fs.mkdirSync(uploadDirectory, { recursive: true })
 app.use('/uploads', express.static(uploadDirectory))
 const paymentUpload = multer({
@@ -338,6 +339,23 @@ app.patch('/api/orders/:number/status', requireAdmin, async (req, res) => {
   if(!order)return res.status(404).json({message:'Pesanan tidak ditemukan'})
   order.status=status; if(!pool)saveFallbackState(); io.emit('order:status',order); res.json(order)
 })
+
+const clientDistDirectory = path.resolve(__dirname, '..', 'client', 'dist')
+if (process.env.NODE_ENV === 'production' && fs.existsSync(clientDistDirectory)) {
+  app.use(express.static(clientDistDirectory, {
+    maxAge: '1h',
+    index: false
+  }))
+  app.use((req, res, next) => {
+    if (req.method !== 'GET' || req.path.startsWith('/api/') || req.path.startsWith('/uploads/') || req.path.startsWith('/socket.io/')) {
+      return next()
+    }
+    if (req.accepts('html')) {
+      return res.sendFile(path.join(clientDistDirectory, 'index.html'))
+    }
+    return next()
+  })
+}
 
 io.on('connection', socket => socket.emit('connected', { message: 'Realtime aktif' }))
 const port = Number(process.env.PORT || 4000)
